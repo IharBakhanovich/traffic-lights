@@ -9,6 +9,11 @@ import lombok.Setter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Manages all the application objects.
+ *
+ * @author Ihar Bakhanovich.
+ */
 public class ApplicationContext {
     Map<Class, Object> cache = new ConcurrentHashMap<>();
     @Setter
@@ -16,10 +21,22 @@ public class ApplicationContext {
     @Getter
     private Config config;
 
+    /**
+     * Creates the ApplicationContext.
+     *
+     * @param config is a {@link Config}.
+     */
     public ApplicationContext(Config config) {
         this.config = config;
     }
 
+    /**
+     * Returns the object by its type.
+     *
+     * @param type is the type of the object which should be returned.
+     * @param <T>  the class of the returned object.
+     * @return the object of the {@param type}.
+     */
     public <T> T getObject(Class<T> type) {
 
         // ask the map, whether the object already exist
@@ -35,6 +52,7 @@ public class ApplicationContext {
         }
         final T t = factory.createObject(implClass);
 
+        // puts the object in the cache, if it should be created only once.
         if (implClass.isAnnotationPresent(Singleton.class)) {
             cache.put(type, t);
         }

@@ -4,6 +4,8 @@ import com.bakhanovich.interviews.trafficLights.model.impl.TrafficLightStatus;
 
 /**
  * Implements the TrafficLight.
+ *
+ * @author Ihar Bakhanovich.
  */
 public interface TrafficLight {
     /**

@@ -2,8 +2,11 @@ package com.bakhanovich.interviews.trafficLights.exception;
 
 /**
  * Exception: Thrown if an entity was not found.
+ *
+ * @author Ihar Bakhanovich.
  */
 public class EntityNotFoundException extends AppException{
+
     /**
      * Constructs a new EntityNotFoundException.
      *

@@ -7,14 +7,24 @@ import com.bakhanovich.interviews.trafficLights.model.impl.TrafficLightStatus;
 import com.bakhanovich.interviews.trafficLights.service.Monitor;
 import com.bakhanovich.interviews.trafficLights.service.Runner;
 
+/**
+ * Monitors the work of the System. The Singleton.
+ *
+ * @author Ihar Bakhanovich
+ */
 @Singleton
 public class SystemMonitorImpl implements Monitor {
+    public static final String RESULT_CONSOLE_MESSAGE
+            = "The time is %s and there are: \n %s green traffic lights \n %s yellow traffic lights \n %s red traffic lights%n";
     @InjectByType
     private Runner runner;
 
     public SystemMonitorImpl() {
     }
 
+    /**
+     * Monitors the work of the system
+     */
     @Override
     public void monitorSystem() {
 
@@ -26,27 +36,14 @@ public class SystemMonitorImpl implements Monitor {
 //        monitorTrafficLights();
         while ((System.currentTimeMillis() - beginTime) < 30000) {
 
-//            System.out.println("begin time is " + beginTime);
-//            System.out.println("current time is " + System.currentTimeMillis());
-//            long delta = System.currentTimeMillis() - beginTime;
-//            System.out.println("delta is " + delta);
             if ((System.currentTimeMillis() - beginTimeForMonitor) > 3000) {
-//                System.out.println("delta2 is " + (System.currentTimeMillis()-beginTimeForMonitor));
                 monitorTrafficLights();
                 beginTimeForMonitor = System.currentTimeMillis();
             }
-//            int timeInterval = 3000; //timer executes every 10 seconds.
-//            timer.scheduleAtFixedRate(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    monitorTrafficLights();
-//                }
-//            }, 1, timeInterval);
         }
 
         runner.stopTrafficLights();
         System.exit(0); //todo
-
     }
 
     private void monitorTrafficLights() {
@@ -65,9 +62,6 @@ public class SystemMonitorImpl implements Monitor {
             }
 
         }
-        System.out.println("the time is " + System.currentTimeMillis() + "and there are: \n "
-                + greenLights + " green traffic lights \n"
-                + yellowLights + " yellow traffic lights \n"
-                + redLights + " red traffic lights");
+        System.out.printf(RESULT_CONSOLE_MESSAGE, System.currentTimeMillis(), greenLights, yellowLights, redLights);
     }
 }

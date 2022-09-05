@@ -5,6 +5,11 @@ import com.bakhanovich.interviews.trafficLights.service.Monitor;
 
 import java.util.HashMap;
 
+/**
+ * Starts the TrafficLightsMonitor
+ *
+ * @author Ihar Bakhanovich
+ */
 public class Main {
     public static void main(String[] args) {
 //        TrafficLightsInitializer trafficLightsInitializer = new TrafficLightsInitializer();

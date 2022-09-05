@@ -6,6 +6,8 @@ import java.util.Objects;
 
 /**
  * Implements {@link TrafficLight}.
+ *
+ * @author Ihar Bakhanovich.
  */
 public class TrafficLightImpl implements TrafficLight {
     private Long id;

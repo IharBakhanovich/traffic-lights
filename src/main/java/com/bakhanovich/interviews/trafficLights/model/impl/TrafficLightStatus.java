@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * Implements {@link TrafficLightStatus}.
+ *
+ * @author Ihar Bakhanovich.
  */
 public enum TrafficLightStatus {
     OFF(0L),

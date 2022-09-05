@@ -6,6 +6,11 @@ import com.bakhanovich.interviews.trafficLights.factory.ObjectFactory;
 
 import java.util.Map;
 
+/**
+ * Adjusts the ApplicationContext. Binds ApplicationContext and ObjectFactory.
+ *
+ * @author Ihar Bakhanovich
+ */
 public class Application {
     public static ApplicationContext run(String packageToScan, Map<Class, Class> ifc2ImplClass) {
         final JavaConfig config = new JavaConfig(packageToScan, ifc2ImplClass);

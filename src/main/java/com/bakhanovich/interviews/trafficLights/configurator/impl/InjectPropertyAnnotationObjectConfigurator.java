@@ -14,11 +14,16 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toMap;
 
 /**
- * Injects object properties, which have annotation @InjectProperty
+ * Injects object properties, which have annotation @InjectProperty.
+ *
+ * @author Ihar Bakhanovich.
  */
 public class InjectPropertyAnnotationObjectConfigurator implements ObjectConfigurator {
     private final Map<String, String> propertiesMap;
 
+    /**
+     * Parses the properties and fills the propertiesMap.
+     */
     @SneakyThrows
     public InjectPropertyAnnotationObjectConfigurator() {
         String path = ClassLoader.getSystemClassLoader().getResource("application.properties").getPath();
@@ -26,6 +31,13 @@ public class InjectPropertyAnnotationObjectConfigurator implements ObjectConfigu
         propertiesMap = lines.map(line -> line.split("=")).collect(toMap(arr -> arr[0], arr -> arr[1]));
     }
 
+    /**
+     * Configures object after its creation by injecting values of its properties,
+     * which are marked with the annotation @InjectProperties.
+     *
+     * @param t       is the object, which should be configured.
+     * @param context is the {@link ApplicationContext}.
+     */
     @Override
     @SneakyThrows
     public void configure(Object t, ApplicationContext context) {

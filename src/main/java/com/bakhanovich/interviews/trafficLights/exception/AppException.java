@@ -1,7 +1,9 @@
 package com.bakhanovich.interviews.trafficLights.exception;
 
 /**
- * The main exception of the application {@link RuntimeException}.
+ * The main application exception {@link RuntimeException}.
+ *
+ * @author Ihar Bakhanovich.
  */
 public class AppException extends RuntimeException{
     String errorCode;

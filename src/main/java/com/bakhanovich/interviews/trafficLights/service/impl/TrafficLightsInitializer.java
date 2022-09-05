@@ -3,29 +3,38 @@ package com.bakhanovich.interviews.trafficLights.service.impl;
 import com.bakhanovich.interviews.trafficLights.annotation.InjectByType;
 import com.bakhanovich.interviews.trafficLights.annotation.InjectProperty;
 import com.bakhanovich.interviews.trafficLights.annotation.Singleton;
+import com.bakhanovich.interviews.trafficLights.model.Pair;
 import com.bakhanovich.interviews.trafficLights.model.TrafficLight;
 import com.bakhanovich.interviews.trafficLights.model.impl.PairImpl;
 import com.bakhanovich.interviews.trafficLights.model.impl.TrafficLightImpl;
 import com.bakhanovich.interviews.trafficLights.repository.GeneralStorage;
 import com.bakhanovich.interviews.trafficLights.service.Initializer;
-import com.bakhanovich.interviews.trafficLights.model.Pair;
 import lombok.SneakyThrows;
 
 import java.util.*;
 
+/**
+ * Initializes the system. The singleton.
+ *
+ * @author Ihar Bakhanovich.
+ */
 @Singleton
 public class TrafficLightsInitializer implements Initializer {
-    @InjectProperty
-    private String amountOfTrafficLights;
+    public static final String TRAFFIC_LIGHT_INITIALIZATIONS_SUCCESS_MESSAGE
+            = "The trafficLight %s was added into the system.";
     //    private static final Logger LOGGER = LogManager.getLogger(TrafficLightsInitializer.class);
     public static final int MILLISECONDS_IN_ONE_SECOND = 1000;
-
+    @InjectProperty
+    private String amountOfTrafficLights;
     @InjectByType
     private GeneralStorage repository;// = ObjectFactory.getInstance().createObject(GeneralStorage.class);
 
     public TrafficLightsInitializer() {
     }
 
+    /**
+     * @return {@link GeneralStorage} with all initialized {@link TrafficLight}
+     */
     @Override
     public GeneralStorage initTrafficLights() {
         int amountOfTrafficLightsFromProperty = Integer.parseInt(amountOfTrafficLights);
@@ -34,17 +43,18 @@ public class TrafficLightsInitializer implements Initializer {
             TrafficLightImpl trafficLight = new TrafficLightImpl((long) (i + 1),
                     random.nextInt((10 - 2) + 2) + 2);
             repository.add(trafficLight);
-//            LOGGER.info("The trafficLight with the id = " + trafficLight.getId()
-//                    + ", with the Status = " + trafficLight.getTrafficLightStatus()
-//                    + " and with the lightDuration " + trafficLight.getLightsDuration()
-//                    + " was added into the repository. Traffic light is: " + trafficLight);
-            System.out.println("The trafficLight " + trafficLight + " was added into the repository. ");
-//            LOGGER.info("The trafficLight " + trafficLight + " was added into the repository. ");
+            System.out.printf(TRAFFIC_LIGHT_INITIALIZATIONS_SUCCESS_MESSAGE, trafficLight);
         }
-//        LOGGER.trace("Initialising ended.");
         return repository;
     }
 
+    /**
+     * Adjust all the {@link TrafficLight} in the system.
+     *
+     * @param repository is the {@link GeneralStorage} which {@link TrafficLight} are to adjust.
+     * @return collection of {@link Pair}: the number of the {@link TrafficLight}
+     * and the {@link Thread} where this {@link TrafficLight} works.
+     */
     @Override
     public List<Pair> adjustTrafficLightsThreads(GeneralStorage repository) {
         List<Pair> threads = new ArrayList<>();

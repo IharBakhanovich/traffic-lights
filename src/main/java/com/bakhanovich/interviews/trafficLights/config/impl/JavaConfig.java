@@ -7,14 +7,26 @@ import org.reflections.Reflections;
 import java.util.Map;
 import java.util.Set;
 
-// has more functionality as in the java reflection class.
+/**
+ * Defines the config of the application.
+ *
+ * @author Ihar Bakhanovich.
+ */
 public class JavaConfig implements Config {
+    // has more functionality as in the java reflection class.
     @Getter
     private Reflections scanner;
 
     // to have an opportunity to choose an implementation from more than one implementation
     private Map<Class, Class> ifc2ImplClass;
 
+    /**
+     * Constructs a {@link JavaConfig}.
+     *
+     * @param packageToScan is the packages to scan.
+     * @param ifc2ImplClass is the map of interface against its impl class.
+     *                      In the case of the multi-implementation it can be useful.
+     */
     public JavaConfig(String packageToScan, Map<Class, Class> ifc2ImplClass) {
         this.scanner = new Reflections(packageToScan);
         this.ifc2ImplClass = ifc2ImplClass;
