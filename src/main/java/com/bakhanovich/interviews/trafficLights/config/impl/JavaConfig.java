@@ -13,6 +13,7 @@ import java.util.Set;
  * @author Ihar Bakhanovich.
  */
 public class JavaConfig implements Config {
+    public static final String EXCEPTION_MESSAGE = " has 0 or more than one impl please update your config";
     // has more functionality as in the java reflection class.
     @Getter
     private Reflections scanner;
@@ -47,7 +48,7 @@ public class JavaConfig implements Config {
             //if the map has no implementation - the lambda will start and the founded implementation will be set in the map
             Set<Class<? extends T>> classes = scanner.getSubTypesOf(ifc);
             if (classes.size() != 1) {
-                throw new RuntimeException(ifc + " has 0 or more than one impl please update your config");
+                throw new RuntimeException(ifc + EXCEPTION_MESSAGE);
             }
             return classes.iterator().next();
         });

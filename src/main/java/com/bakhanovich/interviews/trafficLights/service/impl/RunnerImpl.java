@@ -20,8 +20,8 @@ import java.util.List;
  */
 @Singleton
 public class RunnerImpl implements Runner {
-    public static final String TRAFFIC_LIGHT_STARTED_MESSAGE = "The traffic light with the id %s has started";
-    public static final String TRAFFIC_LIGHT_FINISHED_MESSAGE = "The traffic light with the id %s has finished";
+    public static final String TRAFFIC_LIGHT_STARTED_MESSAGE = "The traffic light with the id %s has started \n";
+    public static final String TRAFFIC_LIGHT_FINISHED_MESSAGE = "The traffic light with the id %s has finished \n";
     @InjectByType
     Initializer trafficLightsInitializer;
     private GeneralStorage repository;

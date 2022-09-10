@@ -21,7 +21,7 @@ import java.util.*;
 @Singleton
 public class TrafficLightsInitializer implements Initializer {
     public static final String TRAFFIC_LIGHT_INITIALIZATIONS_SUCCESS_MESSAGE
-            = "The trafficLight %s was added into the system.";
+            = "The trafficLight %s was added into the system.\n";
     //    private static final Logger LOGGER = LogManager.getLogger(TrafficLightsInitializer.class);
     public static final int MILLISECONDS_IN_ONE_SECOND = 1000;
     @InjectProperty

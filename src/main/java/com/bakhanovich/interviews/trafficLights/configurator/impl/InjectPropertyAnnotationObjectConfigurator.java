@@ -41,7 +41,7 @@ public class InjectPropertyAnnotationObjectConfigurator implements ObjectConfigu
     @Override
     @SneakyThrows
     public void configure(Object t, ApplicationContext context) {
-// here we can adjust the object. In our case the properties will be injected
+        // here we can adjust the object. In our case the properties will be injected
         Class<?> implClass = t.getClass();
         for (Field field : implClass.getDeclaredFields()) {
             InjectProperty annotation = field.getAnnotation(InjectProperty.class);
@@ -53,7 +53,6 @@ public class InjectPropertyAnnotationObjectConfigurator implements ObjectConfigu
                 field.setAccessible(true);
                 field.set(t, value);
             }
-
         }
     }
 }

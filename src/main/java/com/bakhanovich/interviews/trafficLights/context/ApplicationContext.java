@@ -10,7 +10,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Manages all the application objects.
+ * Manages all the application objects. Caches application objects and returns them when it is needed.
+ * If there is no an object in the context - asks the ObjectFactory and the ObjectFactory creates it.
  *
  * @author Ihar Bakhanovich.
  */
@@ -18,6 +19,8 @@ public class ApplicationContext {
     Map<Class, Object> cache = new ConcurrentHashMap<>();
     @Setter
     private ObjectFactory factory;
+
+    //which packets should be scanned and which implementations exist in the map (in the application).
     @Getter
     private Config config;
 
