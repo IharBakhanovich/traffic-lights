@@ -10,6 +10,8 @@ import com.bakhanovich.interviews.trafficLights.model.impl.TrafficLightImpl;
 import com.bakhanovich.interviews.trafficLights.repository.GeneralStorage;
 import com.bakhanovich.interviews.trafficLights.service.Initializer;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -20,10 +22,12 @@ import java.util.*;
  */
 @Singleton
 public class TrafficLightsInitializer implements Initializer {
+
     public static final String TRAFFIC_LIGHT_INITIALIZATIONS_SUCCESS_MESSAGE
             = "The trafficLight %s was added into the system.\n";
-    //    private static final Logger LOGGER = LogManager.getLogger(TrafficLightsInitializer.class);
     public static final int MILLISECONDS_IN_ONE_SECOND = 1000;
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrafficLightsInitializer.class);
+
     @InjectProperty
     private String amountOfTrafficLights;
     @InjectByType
@@ -43,7 +47,7 @@ public class TrafficLightsInitializer implements Initializer {
             TrafficLightImpl trafficLight = new TrafficLightImpl((long) (i + 1),
                     random.nextInt((10 - 2) + 2) + 2);
             repository.add(trafficLight);
-            System.out.printf(TRAFFIC_LIGHT_INITIALIZATIONS_SUCCESS_MESSAGE, trafficLight);
+            LOGGER.info(String.format(TRAFFIC_LIGHT_INITIALIZATIONS_SUCCESS_MESSAGE, trafficLight));
         }
         return repository;
     }

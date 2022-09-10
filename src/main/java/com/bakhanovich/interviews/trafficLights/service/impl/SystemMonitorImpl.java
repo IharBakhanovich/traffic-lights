@@ -6,6 +6,8 @@ import com.bakhanovich.interviews.trafficLights.model.TrafficLight;
 import com.bakhanovich.interviews.trafficLights.model.impl.TrafficLightStatus;
 import com.bakhanovich.interviews.trafficLights.service.Monitor;
 import com.bakhanovich.interviews.trafficLights.service.Runner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Monitors the work of the System. The Singleton.
@@ -16,6 +18,9 @@ import com.bakhanovich.interviews.trafficLights.service.Runner;
 public class SystemMonitorImpl implements Monitor {
     public static final String RESULT_CONSOLE_MESSAGE
             = "The time is %s and there are: \n %s green traffic lights \n %s yellow traffic lights \n %s red traffic lights%n";
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SystemMonitorImpl.class);
+
     @InjectByType
     private Runner runner;
 
@@ -62,6 +67,6 @@ public class SystemMonitorImpl implements Monitor {
             }
 
         }
-        System.out.printf(RESULT_CONSOLE_MESSAGE, System.currentTimeMillis(), greenLights, yellowLights, redLights);
+        LOGGER.info(String.format(RESULT_CONSOLE_MESSAGE, System.currentTimeMillis(), greenLights, yellowLights, redLights));
     }
 }

@@ -9,6 +9,8 @@ import com.bakhanovich.interviews.trafficLights.model.impl.TrafficLightImpl;
 import com.bakhanovich.interviews.trafficLights.repository.GeneralStorage;
 import com.bakhanovich.interviews.trafficLights.service.Initializer;
 import com.bakhanovich.interviews.trafficLights.service.Runner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,9 @@ import java.util.List;
 public class RunnerImpl implements Runner {
     public static final String TRAFFIC_LIGHT_STARTED_MESSAGE = "The traffic light with the id %s has started \n";
     public static final String TRAFFIC_LIGHT_FINISHED_MESSAGE = "The traffic light with the id %s has finished \n";
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RunnerImpl.class);
+
     @InjectByType
     Initializer trafficLightsInitializer;
     private GeneralStorage repository;
@@ -57,7 +62,8 @@ public class RunnerImpl implements Runner {
     public void runTrafficLights() {
         for (Pair thread : threads) {
             thread.getValue().start();
-            System.out.printf(TRAFFIC_LIGHT_STARTED_MESSAGE, thread.getKey());
+
+            LOGGER.info(String.format(TRAFFIC_LIGHT_STARTED_MESSAGE, thread.getKey()));
         }
     }
 
@@ -68,7 +74,8 @@ public class RunnerImpl implements Runner {
     public void stopTrafficLights() {
         for (Pair thread : threads) {
             thread.getValue().stop();
-            System.out.printf(TRAFFIC_LIGHT_FINISHED_MESSAGE, +thread.getKey());
+
+            LOGGER.info(String.format(TRAFFIC_LIGHT_FINISHED_MESSAGE, thread.getKey()));
         }
     }
 }
